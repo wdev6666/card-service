@@ -1,0 +1,38 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: card-service
+
+  datasource:
+    url: jdbc:postgresql://ep-flat-cake-apxxgmk9-pooler.c-7.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+    username: neondb_owner
+    password: npg_Ru7pDE0CVQAv
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    show-sql: true
+
+    properties:
+      hibernate:
+        format_sql: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+
+  endpoint:
+    health:
+      show-details: always
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+  api-docs:
+    path: /v3/api-docs
