@@ -1,5 +1,6 @@
-package com.zbank.card_service.util;
+package com.zbank.cardservice.util;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 public class CardUtil {
@@ -15,6 +16,13 @@ public class CardUtil {
         }
 
         return sb.toString();
+    }
+
+    public static String generatePin(){
+        SecureRandom secureRand = new SecureRandom();
+        int number = secureRand.nextInt(10000);
+
+        return String.format("%04d", number);
     }
 
     public static int generateCVV() {

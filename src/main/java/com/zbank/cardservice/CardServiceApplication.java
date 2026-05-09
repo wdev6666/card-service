@@ -1,4 +1,4 @@
-package com.zbank.card_service;
+package com.zbank.cardservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

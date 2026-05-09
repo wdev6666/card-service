@@ -1,4 +1,4 @@
-package com.zbank.card_service.entity;
+package com.zbank.cardservice.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

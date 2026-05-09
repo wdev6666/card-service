@@ -1,4 +1,4 @@
-package com.zbank.card_service.dto;
+package com.zbank.cardservice.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

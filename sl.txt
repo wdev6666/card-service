@@ -1,0 +1,76 @@
+CREATE TABLE users (
+    pan VARCHAR(10) PRIMARY KEY,
+
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+
+    email VARCHAR(255) UNIQUE NOT NULL,
+    mobile VARCHAR(15) UNIQUE NOT NULL,
+
+    city VARCHAR(100),
+
+    aadhaar VARCHAR(12) UNIQUE,
+    voter_id VARCHAR(20) UNIQUE,
+
+    credit_score INTEGER DEFAULT 0
+        CHECK (credit_score >= 0 AND credit_score <= 900),
+
+    number_of_cards INTEGER DEFAULT 0
+        CHECK (number_of_cards >= 0),
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE employment (
+    id BIGSERIAL PRIMARY KEY,
+
+    pan VARCHAR(10) NOT NULL,
+
+    employer VARCHAR(255) NOT NULL,
+
+    exp NUMERIC(4,1),
+
+    total_exp NUMERIC(4,1),
+
+    monthly_salary NUMERIC(12,2),
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_employment_user
+        FOREIGN KEY (pan)
+        REFERENCES users(pan)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE card (
+    uuid UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+    pan VARCHAR(10) NOT NULL,
+
+    card_type card_type_enum NOT NULL,
+
+    card_limit card_limit_enum NOT NULL,
+
+    issue_date DATE NOT NULL,
+
+    expiry_date DATE NOT NULL,
+
+    cvv_hash TEXT NOT NULL,
+
+    pin_hash TEXT NOT NULL,
+
+    first_time_login BOOLEAN DEFAULT TRUE,
+
+    is_active BOOLEAN DEFAULT TRUE,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_card_user
+        FOREIGN KEY (pan)
+        REFERENCES users(pan)
+        ON DELETE CASCADE
+);
+
+
+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

@@ -1,4 +1,4 @@
-package com.zbank.card_service.config;
+package com.zbank.cardservice.config;
 
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;

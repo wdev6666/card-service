@@ -1,6 +1,6 @@
-package com.zbank.card_service.repository;
+package com.zbank.cardservice.repository;
 
-import com.zbank.card_service.entity.Card;
+import com.zbank.cardservice.entity.Card;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
@@ -19,5 +19,10 @@ public interface CardRepository extends JpaRepository<Card, UUID> {
             String cardNumber,
             String pan,
             String pin
+    );
+
+    boolean existsByPanAndCardType(
+            String pan,
+            String cardType
     );
 }

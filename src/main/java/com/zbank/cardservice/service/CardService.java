@@ -1,10 +1,10 @@
-package com.zbank.card_service.service;
+package com.zbank.cardservice.service;
 
-import com.zbank.card_service.dto.ActivateCardRequest;
-import com.zbank.card_service.dto.CardRequest;
-import com.zbank.card_service.entity.Card;
-import com.zbank.card_service.repository.CardRepository;
-import com.zbank.card_service.util.CardUtil;
+import com.zbank.cardservice.dto.ActivateCardRequest;
+import com.zbank.cardservice.dto.CardRequest;
+import com.zbank.cardservice.entity.Card;
+import com.zbank.cardservice.repository.CardRepository;
+import com.zbank.cardservice.util.CardUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +17,18 @@ public class CardService {
     private final CardRepository cardRepository;
 
     public Card generateCard(CardRequest request) {
+
+        boolean alreadyExists =
+                cardRepository.existsByPanAndCardType(
+                        request.getPan(),
+                        request.getCardType()
+                );
+
+        if (alreadyExists) {
+            throw new RuntimeException(
+                    "Card already exists for this PAN and card type"
+            );
+        }
 
         String cardNumber;
 
@@ -38,7 +50,7 @@ public class CardService {
                 .issueDate(LocalDate.now())
                 .expiryDate(LocalDate.now().plusYears(5))
                 .cvv(CardUtil.generateCVV())
-                .pin("0000")
+                .pin(CardUtil.generatePin())
                 .firstTimeLogin(true)
                 .build();
 
